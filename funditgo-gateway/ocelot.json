@@ -1,0 +1,616 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7120/"
+  },
+  "Routes": [
+    //SECURITY
+
+    {
+      "UpstreamPathTemplate": "/api/Security/login",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/api/Security/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "Key": "Login"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Security/registrar-comun",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/api/Security/registrar-comun",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "Key": "RegistrarComun"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/Security/registrar-administrador",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_SEC": "ADMIN_SEC"
+      },
+
+      "DownstreamPathTemplate": "/api/Security/registrar-administrador",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "Key": "RegistrarAdministrador"
+    },
+
+
+
+    {
+      "UpstreamPathTemplate": "/api/Security/administradores",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_SEC": "ADMIN_SEC"
+      },
+
+      "DownstreamPathTemplate": "/api/Security/administradores",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "Key": "BuscarAdministradores"
+    },
+
+
+    {
+      "UpstreamPathTemplate": "/api/Security/comunes",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_SEC": "ADMIN_SEC"
+      },
+
+      "DownstreamPathTemplate": "/api/Security/comunes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "Key": "BuscarComunes"
+    },
+
+    //PROYECTOS
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_PROYECTOS": "CREATE_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "CrearProyectos"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto",
+      "UpstreamHttpMethod": [ "DELETE" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "EliminarProyecto"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/proyecto/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "DetalleProyecto"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/buscar",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/buscar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "BuscarProyectos"
+    },
+    {
+      "UpstreamPathTemplate": "/api/proyecto/buscar/aceptado",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/proyecto/buscar/aceptado",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "BuscarProyectosAceptados"
+    },
+    {
+      "UpstreamPathTemplate": "/api/proyecto/buscar/creador/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/proyecto/buscar/creador/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "ListaProyectosSegunElUsuarioCreador"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/proyecto/buscar/colaborador/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/proyecto/buscar/colaborador/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "ListaProyectosSegunElUsuarioColaborador"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/proyecto/buscar/donaciones/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/proyecto/buscar/donaciones/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "ListaProyectosSegunElUsuarioDonador"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/colaborador",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_PROYECTOS": "CREATE_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/colaborador",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AgregarColaborador"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/colaborador",
+      "UpstreamHttpMethod": [ "DELETE" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_PROYECTOS": "CREATE_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/colaborador",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "EliminarColaborador"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/comentario",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_COMENTARIOS": "CREATE_COMENTARIOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/comentario",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AgregarComentario"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/comentario",
+      "UpstreamHttpMethod": [ "DELETE" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_COMENTARIOS": "CREATE_COMENTARIOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/comentario",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "EliminarComentario"
+    },
+
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/actualizacion",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_PROYECTOS": "CREATE_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/actualizacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AgregarActualizacion"
+    },
+
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/donacion",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_CREATE_DONACIONES": "CREATE_DONACIONES"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/donacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AgregarDonacion"
+    },
+
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/aceptar",
+      "UpstreamHttpMethod": [ "PUT" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/aceptar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AceptarProyecto"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/rechazar",
+      "UpstreamHttpMethod": [ "PUT" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/rechazar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "RechazarProyecto"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/revision",
+      "UpstreamHttpMethod": [ "PUT" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/revision",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "RevisarProyecto"
+    },
+
+    {
+
+      "UpstreamPathTemplate": "/api/proyecto/observacion",
+      "UpstreamHttpMethod": [ "PUT" ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+
+      "RouteClaimsRequirement": {
+        "Permission_ADMIN_PROYECTOS": "ADMIN_PROYECTOS"
+      },
+
+      "DownstreamPathTemplate": "/api/proyecto/observacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "ObservarProyecto"
+    },
+
+    //USUARIO EN PROYECTOS
+    {
+      "UpstreamPathTemplate": "/api/usuario/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/usuario/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "UsuarioConListaDeFavoritos"
+    },
+    {
+      "UpstreamPathTemplate": "/api/usuario/favorito",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/api/usuario/favorito",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "AgregarProyectoAFavoritos"
+    },
+    {
+      "UpstreamPathTemplate": "/api/usuario/favorito",
+      "UpstreamHttpMethod": [ "DELETE" ],
+
+      "DownstreamPathTemplate": "/api/usuario/favorito",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "EliminarProyectoDeFavoritos"
+    },
+    //TIPOS PROYECTOS EN PROYECTOS
+    {
+      "UpstreamPathTemplate": "/api/tipoProyecto",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/tipoProyecto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        }
+      ],
+      "Key": "ListaDeTiposProyectos"
+    },
+
+    //MS PAGO
+    {
+      "UpstreamPathTemplate": "/api/pago",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/api/pago",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "Key": "InsertarPago"
+    },
+    {
+      "UpstreamPathTemplate": "/api/pago/image/qr/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/pago/image/qr/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "Key": "GetQR"
+    },
+    {
+      "UpstreamPathTemplate": "/api/pago/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+
+      "DownstreamPathTemplate": "/api/pago/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "Key": "ActualizarPago"
+    },
+    {
+      "UpstreamPathTemplate": "/api/pago/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "DownstreamPathTemplate": "/api/pago/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "Key": "GetPagoById"
+    }
+  ]
+}
